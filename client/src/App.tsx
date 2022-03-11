@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import Header from '@/components/Header';
-import Home from '@/pages/Home';
+import { useRoutes } from 'react-router-dom';
+import routes from './routes';
+import { EmojiProvider } from 'react-apple-emojis';
+import emojiData from 'react-apple-emojis/lib/data.json';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const page = useRoutes(routes);
 
   return (
-    <div className="bg-primary-100 min-h-screen">
-      <Header />
-      <Home />
-    </div>
+    <>
+      <EmojiProvider data={emojiData}>{page}</EmojiProvider>
+    </>
   );
 }
 
