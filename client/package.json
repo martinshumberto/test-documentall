@@ -1,7 +1,8 @@
 {
-  "name": "client",
+  "name": "truephone-client",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Humberto Martins",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

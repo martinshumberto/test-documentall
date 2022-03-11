@@ -6,8 +6,12 @@ import * as path from 'path';
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './'),
     },
+  },
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
   },
   esbuild: {
     jsxFactory: 'h',
