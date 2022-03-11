@@ -1,0 +1,64 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: truephone_server
+    restart: always
+    build:
+      context: .
+      dockerfile: ./.docker/server/Dockerfile
+    command: yarn start:dev
+    volumes:
+      - ./server:/app
+    ports:
+      - "4000:4000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - app
+
+  client:
+    container_name: truephone_client
+    restart: always
+    build:
+      context: .
+      dockerfile: ./.docker/client/Dockerfile
+    command: yarn dev
+    volumes:
+      - ./client:/app
+    ports:
+      - "3000:3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - app
+
+  db:
+    container_name: truephone_db
+    image: postgres
+    restart: always
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-}
+      - POSTGRES_DB=${DB_DATABASE:-postgres}
+    volumes:
+      - '.data/db:/var/lib/postgresql/data'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge

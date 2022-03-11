@@ -1,0 +1,31 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Release SERVER
+        uses: akhileshns/heroku-deploy@v3.0.4
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "truephone-server"
+          heroku_email: "humberto@consilio.com.br"
+          appdir: "server"
+          env_file: "server/.env"
+        env:
+          HD_APP_BASE: "server"
+
+      - name: Release CLIENT
+        uses: akhileshns/heroku-deploy@v3.0.4
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "truephone-client"
+          heroku_email: "humberto@consilio.com.br"
+          appdir: "client"
+        env:
+          HD_APP_BASE: "client"
+          HD_REACT_APP_API_URL: "https://truephone-server.herokuapp.com"

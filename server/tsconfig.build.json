@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "ts-node": {
+    "files": true
+  },
+  "include": ["ormconfig.ts"],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+}
