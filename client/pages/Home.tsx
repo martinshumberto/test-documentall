@@ -58,6 +58,7 @@ function Home() {
                   onChange={(event) => {
                     uploadFile(event.target.files[0]);
                   }}
+                  capture
                 />
               </Button>
             </form>
