@@ -34,7 +34,7 @@ export class TypeOrmConfig {
       port: configService.get('DB_PORT'),
       username: configService.get('DB_USERNAME'),
       password: String(configService.get('DB_PASSWORD')),
-      database: configService.get('DB_NAME'),
+      database: configService.get('DB_DATABASE'),
       entities: [__dirname + '/../modules/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/../migration/*.{ts,js}'],
       cli: {
