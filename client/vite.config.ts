@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import * as path from 'path';
-import reactJsx from 'vite-react-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,11 +18,12 @@ export default defineConfig({
     jsxFragment: 'Fragment',
   },
   build: {
+    outDir: path.resolve(__dirname, 'dist'),
     lib: {
       entry: path.resolve(__dirname, 'main.tsx'),
       formats: ['es', 'cjs'],
       name: 'report-ui-component',
     },
   },
-  plugins: [reactJsx(), react()],
+  plugins: [react()],
 });
