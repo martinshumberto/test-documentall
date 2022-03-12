@@ -6,10 +6,10 @@ export class ListingEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   phone: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   message: string;
 
   @Column({ type: 'varchar', nullable: false, default: false })

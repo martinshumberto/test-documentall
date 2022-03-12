@@ -74,13 +74,14 @@ export class FileController {
 
       const data = await this.validate(json);
 
-      await this.fileService.store({
+      const fileSave = await this.fileService.store({
         nameFile: file.originalname,
       });
 
       return res.status(HttpStatus.OK).json({
         message: 'Upload feito com sucesso, verifique o resultado.',
         data: data,
+        file: fileSave,
       });
     } catch ($e) {
       return res.status(HttpStatus.BAD_REQUEST).json({

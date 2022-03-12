@@ -28,7 +28,7 @@ function Result() {
 
   const saveListing = async () => {
     try {
-      await api.post('/listing', result).then(() => {
+      await api.post('/save', result).then(() => {
         navigate('/finish');
       });
     } catch (error) {

@@ -19,7 +19,11 @@ function Home() {
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       }).then(({ data }) => {
-        setResult(data.data);
+        const remap = data?.data?.map((item) => {
+          item.file = data.file.id;
+          return item;
+        });
+        setResult(remap);
         navigate('/verify');
       });
     } catch (error) {
