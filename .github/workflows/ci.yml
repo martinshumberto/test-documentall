@@ -13,7 +13,7 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "truephone-server"
-          heroku_email: "humberto@consilio.com.br"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "server"
         env:
           HD_APP_BASE: "server"
@@ -23,7 +23,7 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "truephone-client"
-          heroku_email: "humberto@consilio.com.br"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "client"
         env:
           HD_APP_BASE: "client"
