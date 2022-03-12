@@ -6,17 +6,13 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-
-      - run: git config user.email "humberto@consilio.com.br"
-      - run: git config user.name "Github"
-      - run: git add -A && git commit -m "Updated code"
+      - uses: actions/checkout@v2
 
       - name: Release SERVER
-        uses: akhileshns/heroku-deploy@v3.0.4
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "truephone-server"
