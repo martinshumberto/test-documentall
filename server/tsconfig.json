@@ -16,7 +16,9 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "sourceRoot": "./"
   },
-  "include": ["modules/**/*.ts", "main.ts", "server.module.ts", "ormconfig.ts"]
+  "include": ["modules", "main.ts", "config/ormconfig.ts"],
+  "exclude": ["node_modules"]
 }
