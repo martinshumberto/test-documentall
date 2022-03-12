@@ -49,6 +49,7 @@ function Home() {
                 <input
                   className="absolute left-0 top-0 opacity-0 h-full z-50 cursor-pointer"
                   type="file"
+                  accept=".csv"
                   onChange={(event) => {
                     setFile(event.target.files[0]);
                     uploadFile(event.target.files[0]);
@@ -65,7 +66,7 @@ function Home() {
 
           <small className="font-md text-gray-500 text-sm mt-6">
             Use nosso{' '}
-            <a href="" className="underline text-primary">
+            <a href="/modelo.csv" className="underline text-primary" download>
               modelo
             </a>{' '}
             de arquivo se você tem alguma dúvida.
