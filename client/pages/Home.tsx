@@ -10,6 +10,7 @@ function Home() {
   const navigate = useNavigate();
 
   const uploadFile = async (file) => {
+    setFile(file);
     const formData = new FormData();
     formData.append('file', file);
     try {
@@ -24,7 +25,7 @@ function Home() {
           return item;
         });
         setResult(remap);
-        navigate('/verify');
+        navigate('/verificando');
       });
     } catch (error) {
       console.log(error);
@@ -55,7 +56,6 @@ function Home() {
                   type="file"
                   accept=".csv"
                   onChange={(event) => {
-                    setFile(event.target.files[0]);
                     uploadFile(event.target.files[0]);
                   }}
                 />

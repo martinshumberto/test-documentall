@@ -30,7 +30,7 @@ function Result() {
   const saveListing = async () => {
     try {
       await api.post('/save', result).then(() => {
-        navigate('/finish');
+        navigate('/tudo-certo');
       });
     } catch (error) {
       console.log(error);

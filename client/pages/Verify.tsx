@@ -11,7 +11,7 @@ function Verify() {
   useEffect(() => {
     setTimeout(() => {
       if (result) {
-        navigate('/result');
+        navigate('/resultado');
       }
     }, 2000);
   }, []);
