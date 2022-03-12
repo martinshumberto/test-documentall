@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node --project tsconfig.build.json -r tsconfig-paths/register node_modules/typeorm/cli.js"
+    "typeorm": "ts-node --project tsconfig.build.json -r tsconfig-paths/register node_modules/typeorm/cli.js  --config config/ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -29,6 +29,7 @@
     "csvtojson": "^2.0.10",
     "dotenv": "^16.0.0",
     "multer": "^1.4.4",
+    "path": "^0.12.7",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

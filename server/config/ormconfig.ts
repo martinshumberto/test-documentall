@@ -4,10 +4,31 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 
-export default class TypeOrmConfig {
+export default {
+  type: 'postgres' as const,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  entities: ['modules/**/*.entity.ts'],
+  migrations: ['migration/*.ts'],
+  cli: {
+    migrationsDir: 'migration',
+  },
+  logging: true,
+  synchronize: true,
+  extra: {
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
+  },
+};
+export class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
-    console.log('TSTASFA: ', __dirname + '/../modules/**/*.entity{.ts,.js}');
     return {
+      name: 'postgres',
       type: 'postgres',
       host: configService.get('DB_HOST'),
       port: configService.get('DB_PORT'),

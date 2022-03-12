@@ -18,7 +18,7 @@ const DIR_TEMP_FILES = `${__dirname}/../../../temp/`;
 
 @Controller()
 export class FileController {
-  constructor(private readonly appService: FileService) {}
+  constructor(private readonly fileService: FileService) {}
 
   private async validate(data: any): Promise<any> {
     const countDigitsValidate = (str: string) => {
@@ -73,6 +73,10 @@ export class FileController {
       await unlinkAsync(`${DIR_TEMP_FILES}${file.filename}`);
 
       const data = await this.validate(json);
+
+      await this.fileService.store({
+        nameFile: file.originalname,
+      });
 
       return res.status(HttpStatus.OK).json({
         message: 'Upload feito com sucesso, verifique o resultado.',
