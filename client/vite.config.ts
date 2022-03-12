@@ -1,24 +1,29 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import * as path from 'path';
+import reactJsx from 'vite-react-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-      },
-    },
-  },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './'),
+      '@': path.resolve(__dirname, './'),
     },
   },
   server: {
     port: 3000,
     host: '0.0.0.0',
   },
-  plugins: [react()],
+  esbuild: {
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+  },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'main.tsx'),
+      formats: ['es', 'cjs'],
+      name: 'report-ui-component',
+    },
+  },
+  plugins: [reactJsx(), react()],
 });
