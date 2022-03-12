@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  // headers: {
-  //   'Access-Control-Allow-Origin': '*',
-  // },
-  baseURL: 'http://localhost:4000' || '/api',
+  baseURL: process.env.API_URL || 'http://localhost:4000' || '/api',
 });
 
 api.interceptors.request.use(

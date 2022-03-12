@@ -14,20 +14,6 @@ export default defineConfig({
     port: parseInt(process.env.PORT) || 3000,
     host: '0.0.0.0',
   },
-  // esbuild: {
-  //   jsxFactory: 'h',
-  //   jsxFragment: 'Fragment',
-  // },
-  // root: resolve(__dirname),
-  // build: {
-  //   outDir: resolve(__dirname, 'dist'),
-  //   lib: {
-  //     entry: resolve(__dirname, 'main.tsx'),
-  //     formats: ['es', 'cjs'],
-  //     name: 'TruePhoneClient',
-  //     fileName: (format) => `true-phone-client.${format}.js`,
-  //   },
-  // },
   build: {
     sourcemap: true,
   },
