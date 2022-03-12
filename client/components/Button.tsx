@@ -16,12 +16,12 @@ function Button({
 }: IProps) {
   const themes = {
     primary:
-      'bg-primary text-white hover:bg-primary-600 transition-all shadow-xl shadow-primary/10',
+      'bg-primary border-2 border-primary text-white hover:bg-primary-600 transition-all shadow-xl shadow-primary/10',
     outline:
       'hover:bg-gray-100 border-2 border-gray-400 text-gray-500 transition-all',
   };
   const sizes = {
-    md: 'py-3 px-6',
+    md: 'md:py-3 md:px-6 py-2 px-3',
     lg: 'py-5 px-8',
   };
   return (

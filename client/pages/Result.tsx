@@ -6,6 +6,7 @@ import { Emoji } from 'react-apple-emojis';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '@/contexts/store';
 import { api } from '@/services/api';
+import Table from '@/components/Table';
 
 function Result() {
   const [count, setCount] = useState(0);
@@ -36,10 +37,6 @@ function Result() {
     }
   };
 
-  function limiter(text, count) {
-    return text?.slice(0, count) + (text?.length > count ? '...' : '');
-  }
-
   return (
     <div>
       <div className="flex justify-center mt-24 text-center">
@@ -51,68 +48,7 @@ function Result() {
           </h1>
 
           <div className="mt-10 w-full">
-            <div className="flex flex-col">
-              <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-                  <div className="overflow-hidden border rounded-lg">
-                    <table className="min-w-full">
-                      <thead className="border-b-2">
-                        <tr>
-                          <th
-                            scope="col"
-                            className="py-3 px-6 text-sm font-bold text-left text-gray-800"
-                          >
-                            Número
-                          </th>
-                          <th
-                            scope="col"
-                            className="py-3 px-6 text-sm font-bold text-left text-gray-800"
-                          >
-                            Prévia da mensagem
-                          </th>
-                          <th
-                            scope="col"
-                            className="py-3 px-6 text-sm font-bold text-left text-gray-800"
-                          >
-                            Resultado
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {result?.map((item) => {
-                          return (
-                            <tr className="text-sm">
-                              <td className="px-6 py-4 whitespace-no-wrap border-b text-left">
-                                {item.phone}
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b text-left">
-                                {limiter(item.message, 68)}
-                              </td>
-                              <td className="px-6 py-4 whitespace-no-wrap border-b pl-1">
-                                {item.valid ? (
-                                  <div className="flex items-center space-x-3 justify-end">
-                                    <span>Válido</span>
-                                    <BiCheck
-                                      className="text-green-600"
-                                      size={18}
-                                    />
-                                  </div>
-                                ) : (
-                                  <div className="flex items-center space-x-3 justify-end">
-                                    <span>Inválida</span>
-                                    <CgClose className="text-red-600" />
-                                  </div>
-                                )}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Table data={result} />
           </div>
 
           <div className="mt-10 flex flex-col items-center">

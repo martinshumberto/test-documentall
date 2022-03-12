@@ -31,6 +31,10 @@ function Home() {
     }
   };
 
+  const forceDownload = (path) => {
+    window.location.href = path;
+  };
+
   return (
     <div>
       <div className="flex justify-center mt-24 text-center">
@@ -66,7 +70,11 @@ function Home() {
 
           <small className="font-md text-gray-500 text-sm mt-6">
             Use nosso{' '}
-            <a href="/modelo.csv" className="underline text-primary" download>
+            <a
+              onClick={() => forceDownload('/modelo.csv')}
+              className="underline text-primary cursor-pointer"
+              download="modelo.csv"
+            >
               modelo
             </a>{' '}
             de arquivo se você tem alguma dúvida.
