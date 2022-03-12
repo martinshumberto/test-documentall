@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "cd ../ && git subtree push --prefix client heroku-client master"
   },
   "dependencies": {
     "axios": "^0.26.1",
