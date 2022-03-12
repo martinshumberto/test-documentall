@@ -15,7 +15,6 @@ jobs:
           heroku_app_name: "truephone-server"
           heroku_email: "humberto@consilio.com.br"
           appdir: "server"
-          env_file: "server/.env"
         env:
           HD_APP_BASE: "server"
 
