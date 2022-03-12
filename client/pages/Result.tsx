@@ -1,18 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import { CgClose } from 'react-icons/cg';
 import { BiCheck } from 'react-icons/bi';
 import { Emoji } from 'react-apple-emojis';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useStore } from '@/contexts/store';
+import { api } from '@/services/api';
 
 function Result() {
+  const [count, setCount] = useState(0);
+  const { result } = useStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (result) {
+      let i = 0;
+      result.forEach((item) => {
+        if (item.valid === true) {
+          i++;
+        }
+      });
+      setCount(i);
+    } else {
+      navigate('/');
+    }
+  });
+
+  const saveListing = async () => {
+    try {
+      await api.post('/listing', result).then(() => {
+        navigate('/finish');
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function limiter(text, count) {
+    return text?.slice(0, count) + (text?.length > count ? '...' : '');
+  }
+
   return (
     <div>
       <div className="flex justify-center mt-24 text-center">
         <div className="flex flex-col items-center rounded-xl bg-white py-10 px-4 md:py-20 md:px-8 shadow-2xl shadow-primary/20 border-4 border-primary max-w-4xl mx-6">
           <h1 className="text-4xl font-bold md:px-32">
-            Encontramos <span className="text-secondary">32</span> mensagens
-            válidas em sua lista{' '}
+            Encontramos <span className="text-secondary">{count}</span>{' '}
+            mensagens válidas em sua lista{' '}
             <Emoji name="party-popper" width={38} className="inline mb-2" />
           </h1>
 
@@ -45,20 +79,34 @@ function Result() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="bg-white last:border-none border-b-2 text-left">
-                          <td className="py-4 px-6 text-sm text-gray-900 whitespace-nowrap">
-                            (62) 99999-9901
-                          </td>
-                          <td className="py-4 px-6 text-sm text-gray-900 whitespace-nowrap">
-                            Olá fulano, você está recebendo essa mensagem...
-                          </td>
-                          <td className="py-4 px-6 text-sm text-gray-900 whitespace-nowrap">
-                            <div className="flex items-center space-x-3">
-                              <span>Válida</span>
-                              <BiCheck className="text-green-500" size={25} />
-                            </div>
-                          </td>
-                        </tr>
+                        {result?.map((item) => {
+                          return (
+                            <tr className="text-sm">
+                              <td className="px-6 py-4 whitespace-no-wrap border-b text-left">
+                                {item.phone}
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b text-left">
+                                {limiter(item.message, 68)}
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b pl-1">
+                                {item.valid ? (
+                                  <div className="flex items-center space-x-3 justify-end">
+                                    <span>Válido</span>
+                                    <BiCheck
+                                      className="text-green-600"
+                                      size={18}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="flex items-center space-x-3 justify-end">
+                                    <span>Inválida</span>
+                                    <CgClose className="text-red-600" />
+                                  </div>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -72,7 +120,7 @@ function Result() {
               Está pronto para prosseguir?{' '}
               <Emoji name="thinking-face" width={25} className="inline mb-2" />
             </h2>
-            <div className="flex space-x-4 mt-5">
+            <div className="flex space-x-4 mt-5 items-center">
               <Link to="/">
                 <Button
                   theme="outline"
@@ -81,11 +129,12 @@ function Result() {
                   Cancelar
                 </Button>
               </Link>
-              <Link to="/finish">
-                <Button icon={<BiCheck className="text-white" size={25} />}>
-                  Salvar lista
-                </Button>
-              </Link>
+              <Button
+                onClick={saveListing}
+                icon={<BiCheck className="text-white" size={25} />}
+              >
+                Salvar lista
+              </Button>
             </div>
           </div>
         </div>

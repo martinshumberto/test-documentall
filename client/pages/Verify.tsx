@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import { VscLoading } from 'react-icons/vsc';
-import { Link, useRoutes } from 'react-router-dom';
+import { Link, useNavigate, useRoutes } from 'react-router-dom';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { useStore } from '@/contexts/store';
 
 function Verify() {
+  const { result } = useStore();
+  const navigate = useNavigate();
   useEffect(() => {
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {
+      if (result) {
+        navigate('/result');
+      }
+    }, 2000);
   }, []);
 
   return (

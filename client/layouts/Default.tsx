@@ -9,9 +9,11 @@ import Header from '@/components/Header';
 
 function Default() {
   return (
-    <div className="bg-primary-100 min-h-screen">
+    <div className="bg-primary-100 min-h-screen h-full block pb-20">
       <Header />
-      <Outlet />
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 }

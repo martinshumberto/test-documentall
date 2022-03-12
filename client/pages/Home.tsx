@@ -1,7 +1,32 @@
 import Button from '@/components/Button';
+import { useStore } from '@/contexts/store';
+import { api } from '@/services/api';
+import { useState } from 'react';
 import { Emoji } from 'react-apple-emojis';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const { file, setFile, setResult } = useStore();
+  const navigate = useNavigate();
+
+  const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      await api({
+        method: 'post',
+        url: '/upload',
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }).then(({ data }) => {
+        setResult(data.data);
+        navigate('/verify');
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-center mt-24 text-center">
@@ -14,13 +39,19 @@ function Home() {
           </div>
 
           <div className="mt-10">
-            <Button size={'lg'}>
-              Selecionar lista
-              <input
-                className="absolute left-0 top-0 opacity-0 h-full z-50 cursor-pointer"
-                type="file"
-              />
-            </Button>
+            <form id="form" onSubmit={uploadFile}>
+              <Button size={'lg'}>
+                Selecionar lista
+                <input
+                  className="absolute left-0 top-0 opacity-0 h-full z-50 cursor-pointer"
+                  type="file"
+                  onChange={(event) => {
+                    setFile(event.target.files[0]);
+                    uploadFile(event.target.files[0]);
+                  }}
+                />
+              </Button>
+            </form>
           </div>
 
           <p className="text-lg font-medium px-10 mt-6 leading-6">
