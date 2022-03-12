@@ -24,6 +24,6 @@
     "jsxFragmentFactory": "Fragment"
   },
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
