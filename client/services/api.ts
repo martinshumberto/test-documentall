@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: process.env.API_URL || 'http://localhost:4000' || '/api',
+  baseURL: process.env.API_URL || 'http://localhost:4000',
 });
 
 api.interceptors.request.use(
