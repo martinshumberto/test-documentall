@@ -3,7 +3,7 @@ version: '3.9'
 services:
   server:
     container_name: truephone_server
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./.docker/server/Dockerfile
@@ -26,7 +26,7 @@ services:
 
   client:
     container_name: truephone_client
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./.docker/client/Dockerfile
@@ -46,7 +46,7 @@ services:
   db:
     container_name: truephone_db
     image: postgres
-    restart: always
+    restart: unless-stopped
     volumes:
       - './.data/db:/var/lib/postgresql/data'
     ports:
